@@ -63,7 +63,7 @@ async function Home() {
           </Badge>
         </nav>
 
-        <Container className="space-y-6">
+        <Container className="space-y-6 mb-6">
           {/* Banner Content */}
           <div className="relative z-10 glass mt-4 px-4 py-6 rounded-3xl flex items-center justify-between mx-auto ">
             <div className="flex flex-col gap-4">

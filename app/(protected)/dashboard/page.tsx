@@ -26,9 +26,7 @@ import {
   Shield,
 } from "lucide-react";
 import Link from "next/link";
-import { getCurrentUser, signOut } from "@/lib/actions/auth.action";
-import { redirect } from "next/navigation";
-import Image from "next/image";
+import { getCurrentUser } from "@/lib/actions/auth.action";
 import NavBar from "@/components/nav-bar";
 
 export default async function DashboardPage() {
