@@ -150,7 +150,3 @@ body {
 .neon-green {
   box-shadow: 0 0 20px rgba(34, 197, 94, 0.3), 0 0 40px rgba(34, 197, 94, 0.1);
 }
-
-.auth-layout {
-  @apply flex items-center justify-center mx-auto max-w-7xl min-h-screen max-sm:px-4 max-sm:py-8;
-}

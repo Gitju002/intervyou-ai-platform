@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,13 +30,14 @@ import { getCurrentUser, signOut } from "@/lib/actions/auth.action";
 import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
-  const [credits, setCredits] = useState(25);
+  // const [credits, setCredits] = useState(25);
   const user = await getCurrentUser();
 
-  const handleSignOut = () => {
-    signOut();
-  };
+  // const handleSignOut = () => {
+  //   signOut();
+  // };
 
+  const credits = 25;
   const getCreditStatus = () => {
     if (credits > 20)
       return {
@@ -100,7 +100,7 @@ export default async function DashboardPage() {
           <span className="text-gray-300">Welcome, {user.name}</span>
           <Button
             variant="ghost"
-            onClick={handleSignOut}
+            // onClick={handleSignOut}
             className="text-gray-300 hover:text-white hover:bg-white/10"
           >
             <LogOut className="w-4 h-4 mr-2" />
@@ -237,7 +237,7 @@ export default async function DashboardPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex flex-col gap-y-4">
-                <Link href="/interview/mock">
+                <Link href="/interview">
                   <Button
                     className="w-full justify-start bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-8 text-lg neon-purple"
                     disabled={credits < 5}
