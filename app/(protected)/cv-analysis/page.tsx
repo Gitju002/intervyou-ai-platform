@@ -117,7 +117,7 @@ export default function CVAnalysisPage() {
         </div>
         <Badge
           variant={"outline"}
-          className="bg-green-500/20 text-green-300 text-xs sm:text-sm"
+          className="hidden lg:block bg-green-500/20 text-green-300 text-xs sm:text-sm"
         >
           Powered by Gemini AI
         </Badge>

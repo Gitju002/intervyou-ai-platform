@@ -226,10 +226,10 @@ li {
 
 .avatar {
   @apply z-10 flex items-center justify-center bg-slate-900 rounded-full size-[120px] relative;
+}
 
-  .animate-speak {
-    @apply absolute inline-flex size-5/6 animate-ping rounded-full opacity-75;
-  }
+.animate-speak {
+  @apply absolute bg-slate-500 inline-flex size-5/6 animate-ping rounded-full opacity-75;
 }
 
 .tech-tooltip {

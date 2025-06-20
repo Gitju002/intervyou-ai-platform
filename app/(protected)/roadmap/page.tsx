@@ -206,7 +206,7 @@ export default function RoadmapPage() {
         </div>
         <Badge
           variant={"outline"}
-          className="bg-blue-500/20 text-blue-300 text-xs sm:text-sm"
+          className="hidden lg:block bg-blue-500/20 text-blue-300 text-xs sm:text-sm"
         >
           Powered by Gemini AI
         </Badge>

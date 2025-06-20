@@ -3,7 +3,6 @@
 import { z } from "zod";
 import Link from "next/link";
 import Image from "next/image";
-import { toast } from "sonner";
 import { auth } from "@/firebase/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -14,11 +13,9 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
 import { signIn, signUp } from "@/lib/actions/auth.action";
-import FormField from "./form-field";
 import {
   Card,
   CardContent,
@@ -26,20 +23,22 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Crown, Eye, EyeOff, Mic, Shield, Zap } from "lucide-react";
+import { Crown, Eye, EyeOff, Shield, Zap } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const authFormSchema = (type: FormType) => {
   return z.object({
     name: type === "sign-up" ? z.string().min(3) : z.string().optional(),
     email: z.string().email(),
-    password: z.string().min(3),
+    password: z.string().min(6),
   });
 };
 
 const AuthForm = ({ type }: { type: FormType }) => {
+  const { toast } = useToast();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -72,11 +71,20 @@ const AuthForm = ({ type }: { type: FormType }) => {
         });
 
         if (!result.success) {
-          toast.error(result.message);
+          toast({
+            title: "Error",
+            description: result.message,
+            variant: "destructive",
+          });
           return;
         }
 
-        toast.success("Account created successfully. Please sign in.");
+        toast({
+          title: "Account Created! 🎉",
+          description:
+            "Welcome to IntervYou! You can now sign in to start your interview preparation journey.",
+        });
+
         router.push("/sign-in");
       } else {
         const { email, password } = data;
@@ -89,7 +97,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
         const idToken = await userCredential.user.getIdToken();
         if (!idToken) {
-          toast.error("Sign in Failed. Please try again.");
+          toast({
+            title: "Sign In Failed",
+            description: "Please try again.",
+            variant: "destructive",
+          });
           return;
         }
 
@@ -98,12 +110,40 @@ const AuthForm = ({ type }: { type: FormType }) => {
           idToken,
         });
 
-        toast.success("Signed in successfully.");
+        toast({
+          title: "Welcome Back! 👋",
+          description:
+            "You're now signed in. Let's continue your interview preparation!",
+          variant: "default",
+        });
+
         router.push("/dashboard");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error(`There was an error: ${error}`);
+
+      // Handle specific Firebase auth errors
+      let errorMessage = "Something went wrong. Please try again.";
+
+      if (error.code === "auth/user-not-found") {
+        errorMessage = "No account found with this email address.";
+      } else if (error.code === "auth/wrong-password") {
+        errorMessage = "Incorrect password. Please try again.";
+      } else if (error.code === "auth/email-already-in-use") {
+        errorMessage = "An account with this email already exists.";
+      } else if (error.code === "auth/weak-password") {
+        errorMessage = "Password should be at least 6 characters long.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "Please enter a valid email address.";
+      } else if (error.code === "auth/too-many-requests") {
+        errorMessage = "Too many failed attempts. Please try again later.";
+      }
+
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
     }
   };
 

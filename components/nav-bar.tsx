@@ -54,7 +54,7 @@ const NavBar = ({ userName }: { userName: string }) => {
         </div>
       </div>
       <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2">
+        <div className="hidden lg:flex items-center space-x-2">
           <Zap className={`w-4 h-4 ${creditStatus.color}`} />
           <span className="text-white font-medium">{credits} Credits</span>
           <Badge
@@ -64,7 +64,9 @@ const NavBar = ({ userName }: { userName: string }) => {
             {creditStatus.status}
           </Badge>
         </div>
-        <span className="text-gray-300">Welcome, {userName}</span>
+        <span className="hidden md:block text-gray-300">
+          Welcome, {userName}
+        </span>
         <Button
           variant="ghost"
           onClick={handleSignOut}

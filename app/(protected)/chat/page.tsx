@@ -138,7 +138,7 @@ export default function ChatPage() {
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-orange-100 text-xs sm:text-sm">
+          <Badge className="hidden lg:block bg-gradient-to-r from-orange-500 to-red-500 text-orange-100 text-xs sm:text-sm">
             Powered by Gemini AI
           </Badge>
           <Button
