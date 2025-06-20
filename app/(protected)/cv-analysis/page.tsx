@@ -86,15 +86,12 @@ export default function CVAnalysisPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden pattern">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
       </div>
-
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
 
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-4 sm:p-6 lg:px-8 border-b border-white/10 glass">
@@ -118,7 +115,10 @@ export default function CVAnalysisPage() {
             </span>
           </div>
         </div>
-        <Badge className="bg-green-500/20 text-green-300 text-xs sm:text-sm">
+        <Badge
+          variant={"outline"}
+          className="bg-green-500/20 text-green-300 text-xs sm:text-sm"
+        >
           Powered by Gemini AI
         </Badge>
       </nav>
@@ -137,7 +137,7 @@ export default function CVAnalysisPage() {
               </p>
             </div>
 
-            <Card className="bg-premium-card border border-white/10">
+            <Card className="glass border border-white/10">
               <CardHeader>
                 <CardTitle className="text-white text-xl sm:text-2xl">
                   Upload Your CV
@@ -241,7 +241,10 @@ export default function CVAnalysisPage() {
                 CV Analysis Results
               </h1>
               <div className="flex items-center justify-center space-x-4">
-                <Badge className="bg-green-500/20 text-green-300 text-lg px-4 py-2">
+                <Badge
+                  variant={"outline"}
+                  className="bg-green-500/20 text-green-300 text-lg px-4 py-2"
+                >
                   Overall Score: {analysisResults?.overallScore}/100
                 </Badge>
               </div>
@@ -342,6 +345,7 @@ export default function CVAnalysisPage() {
                         </h3>
                         <div className="flex items-center space-x-2">
                           <Badge
+                            variant={"outline"}
                             className={`${
                               section.status === "excellent"
                                 ? "bg-green-500/20 text-green-300"
@@ -383,6 +387,7 @@ export default function CVAnalysisPage() {
                       {analysisResults?.keywords.present.map(
                         (keyword, index) => (
                           <Badge
+                            variant={"outline"}
                             key={index}
                             className="bg-green-500/20 text-green-300"
                           >
@@ -401,6 +406,7 @@ export default function CVAnalysisPage() {
                       {analysisResults?.keywords.missing.map(
                         (keyword, index) => (
                           <Badge
+                            variant={"outline"}
                             key={index}
                             className="bg-orange-500/20 text-orange-300"
                           >
@@ -425,7 +431,7 @@ export default function CVAnalysisPage() {
               >
                 Analyze Another CV
               </Button>
-              <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+              <Button className="bg-gradient-to-r from-emerald-300 to-emerald-500 hover:from-emerald-400 hover:to-emerald-600">
                 Download Report
               </Button>
             </div>

@@ -50,12 +50,42 @@ export default function RoadmapPage() {
     "Cybersecurity Specialist",
     "Cloud Architect",
     "Business Analyst",
+    "Software Engineer",
+    "Web Developer",
+    "Game Developer",
+    "Blockchain Developer",
+    "AI Researcher",
+    "Systems Analyst",
+    "Network Engineer",
+    "Database Administrator",
+    "Technical Writer",
+    "IT Support Specialist",
+    "Quality Assurance Engineer",
+    "Digital Marketing Specialist",
+    "Sales Engineer",
+    "Project Manager",
+    "Technical Recruiter",
+    "Data Analyst",
+    "Frontend Developer",
+    "Backend Developer",
+    "Embedded Systems Engineer",
+    "Robotics Engineer",
+    "Augmented Reality Developer",
+    "Virtual Reality Developer",
+    "Internet of Things (IoT) Developer",
+    "Game Designer",
+    "Augmented Reality (AR) Developer",
+    "Virtual Reality (VR) Developer",
+    "Computer Vision Engineer",
+    "Natural Language Processing (NLP) Engineer",
   ];
 
   const experienceLevels = [
     "Complete Beginner",
-    "Some Programming Knowledge",
-    "Junior Developer (0-2 years)",
+    "No Technical Background",
+    "Some Technical Background",
+    "Entry Level (0-1 year)",
+    "Junior (0-2 years)",
     "Mid-level (2-5 years)",
     "Senior (5+ years)",
   ];
@@ -145,15 +175,12 @@ export default function RoadmapPage() {
   );
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden pattern">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
       </div>
-
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
 
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-4 sm:p-6 lg:px-8 border-b border-white/10 glass">
@@ -276,7 +303,7 @@ export default function RoadmapPage() {
 
                 <Button
                   onClick={generateRoadmap}
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
+                  className="w-full text-white bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
                   disabled={isGenerating || !selectedCareer || !experience}
                 >
                   {isGenerating ? (
@@ -297,7 +324,7 @@ export default function RoadmapPage() {
         ) : (
           // Generated Roadmap Display
           <div className="max-w-6xl mx-auto">
-            <Card className="bg-premium-card border border-white/10 mb-8">
+            <Card className="glass border border-white/10 mb-8">
               <CardContent className="p-6 sm:p-8">
                 <div className="prose prose-invert max-w-none">
                   <div className="text-center mb-8">
@@ -326,7 +353,7 @@ export default function RoadmapPage() {
                     {parsedRoadmap.phases.map((phase, index) => (
                       <Card
                         key={index}
-                        className="bg-white/5 border-white/10 backdrop-blur-sm"
+                        className="bg-white/5 border-white/10 bg-premium-dark"
                       >
                         <CardHeader>
                           <div className="flex items-center justify-between">
@@ -422,7 +449,7 @@ export default function RoadmapPage() {
               >
                 Generate New Roadmap
               </Button>
-              <Button className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+              <Button className="w-full text-white transition-all duration-200 sm:w-auto bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-blue-700">
                 Save Roadmap
               </Button>
             </div>

@@ -108,15 +108,12 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="min-h-screen  relative ">
+    <div className="min-h-screen overflow-hidden relative pattern ">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
       </div>
-
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
 
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-4 sm:p-6 lg:px-8 border-b border-white/10 glass">
@@ -141,7 +138,7 @@ export default function ChatPage() {
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <Badge className="bg-green-500/20 text-green-300 text-xs sm:text-sm">
+          <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-orange-100 text-xs sm:text-sm">
             Powered by Gemini AI
           </Badge>
           <Button
@@ -166,7 +163,7 @@ export default function ChatPage() {
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }  lg:translate-x-0 fixed lg:relative z-40 basis-1/4 border-r border-white/10 p-4 sm:p-6 transition-transform duration-300 ease-in-out bg-black lg:bg-transparent`}
         >
-          <Card className="bg-premium-card border border-white/10">
+          <Card className="glass border border-white/10">
             <CardHeader>
               <CardTitle className="text-white flex items-center text-lg">
                 <Lightbulb className="w-5 h-5 mr-2" />

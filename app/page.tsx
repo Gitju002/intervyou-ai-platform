@@ -17,6 +17,70 @@ import {
 import Link from "next/link";
 import { isAuthenticated } from "@/lib/actions/auth.action";
 import { redirect } from "next/navigation";
+import Image from "next/image";
+
+const features = [
+  {
+    title: "AI Mock Interviews",
+    description:
+      "Practice with advanced AI that adapts to your responses and provides real-time feedback.",
+    icon: <Mic className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+    badge: "Voice Powered",
+    badgeClass: "bg-purple-600/20 text-purple-300",
+    cardClass: "bg-premium-dark hover:border-purple-500/50 neon-purple",
+    iconBg: "from-purple-500 to-purple-700 neon-purple",
+  },
+  {
+    title: "Career Roadmaps",
+    description:
+      "Get personalized learning paths and development strategies for your target career.",
+    icon: <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+    badge: "AI Generated",
+    badgeClass: "bg-blue-600/20 text-blue-300",
+    cardClass: "bg-premium-dark hover:border-blue-500/50 neon-blue",
+    iconBg: "from-blue-500 to-cyan-500 neon-blue",
+  },
+  {
+    title: "CV Analysis",
+    description:
+      "Advanced AI analysis with industry-specific recommendations and ATS optimization.",
+    icon: <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+    badge: "Expert Level",
+    badgeClass: "bg-green-600/20 text-green-300",
+    cardClass: "bg-premium-dark hover:border-green-500/50 neon-green",
+    iconBg: "from-green-500 to-emerald-500 neon-green",
+  },
+  {
+    title: "AI Chat Assistant",
+    description:
+      "24/7 intelligent support for interview questions and career guidance.",
+    icon: <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+    badge: "Always Available",
+    badgeClass: "bg-orange-600/20 text-orange-300",
+    cardClass: "bg-premium-dark hover:border-orange-500/50 neon-orange",
+    iconBg: "from-orange-500 to-red-500",
+  },
+  {
+    title: "Question Bank",
+    description:
+      "Access 10,000+ curated interview questions across all industries and roles.",
+    icon: <Brain className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+    badge: "Comprehensive",
+    badgeClass: "bg-indigo-600/20 text-indigo-300",
+    cardClass: "bg-premium-dark hover:border-indigo-500/50 neon-indigo",
+    iconBg: "from-indigo-500 to-purple-500",
+  },
+  {
+    title: "Performance Analytics",
+    description:
+      "Detailed insights and progress tracking with personalized improvement plans.",
+    icon: <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+    badge: "Data Driven",
+    badgeClass: "bg-pink-600/20 text-pink-300",
+    cardClass: "bg-premium-dark hover:border-pink-500/50 neon-pink",
+    iconBg: "from-pink-500 to-rose-500",
+  },
+];
 
 export default async function HomePage() {
   const isLoggedIn = await isAuthenticated();
@@ -26,7 +90,7 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden antialiased pattern">
       {/* Animated background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20"></div>
@@ -34,17 +98,17 @@ export default async function HomePage() {
         <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent"></div>
       </div>
 
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
-
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-4 sm:p-6 lg:px-8 glass">
         <div className="flex items-center space-x-2 sm:space-x-3">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center neon-purple">
-            <Mic className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-          </div>
+          <Image
+            src="/IntervYou-Logo.svg"
+            alt="IntervYou Logo"
+            width={32}
+            height={32}
+          />
           <div>
-            <span className="text-xl sm:text-2xl font-bold text-white">
+            <span className="text-xl sm:text-2xl font-semibold text-white">
               IntervYou
             </span>
             <div className="text-xs text-purple-400 font-medium hidden sm:block">
@@ -159,131 +223,47 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="bg-premium-card border border-white/10 hover:border-purple-500/50 transition-all duration-300 neon-purple">
-              <CardContent className="p-6 sm:p-8">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 neon-purple">
-                  <Mic className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+            {features.map(
+              (
+                {
+                  title,
+                  description,
+                  icon,
+                  badge,
+                  badgeClass,
+                  cardClass,
+                  iconBg,
+                },
+                i
+              ) => (
+                <div className=" [background:linear-gradient(45deg,#172033,theme(colors.slate.800)_50%,#172033)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] rounded-2xl border border-transparent animate-border">
+                  <Card
+                    key={i}
+                    className={`min-h-80 border border-white/10 transition-all duration-300 ${cardClass}`}
+                  >
+                    <CardContent className="p-6 sm:p-8">
+                      <div
+                        className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br ${iconBg} rounded-2xl flex items-center justify-center mb-4 sm:mb-6`}
+                      >
+                        {icon}
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
+                        {title}
+                      </h3>
+                      <p className="text-gray-300 mb-4 text-sm sm:text-base">
+                        {description}
+                      </p>
+                      <Badge
+                        variant="outline"
+                        className={`${badgeClass} text-xs sm:text-sm`}
+                      >
+                        {badge}
+                      </Badge>
+                    </CardContent>
+                  </Card>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
-                  AI Mock Interviews
-                </h3>
-                <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                  Practice with advanced AI that adapts to your responses and
-                  provides real-time feedback.
-                </p>
-                <Badge
-                  variant={"outline"}
-                  className="bg-purple-600/20 text-purple-300 text-xs sm:text-sm"
-                >
-                  Voice Powered
-                </Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-premium-card border border-white/10 hover:border-blue-500/50 transition-all duration-300 neon-blue">
-              <CardContent className="p-6 sm:p-8">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 neon-blue">
-                  <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-                </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
-                  Career Roadmaps
-                </h3>
-                <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                  Get personalized learning paths and development strategies for
-                  your target career.
-                </p>
-                <Badge
-                  variant={"outline"}
-                  className="bg-blue-600/20 text-blue-300 text-xs sm:text-sm"
-                >
-                  AI Generated
-                </Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-premium-card border border-white/10 hover:border-green-500/50 transition-all duration-300 neon-green">
-              <CardContent className="p-6 sm:p-8">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 neon-green">
-                  <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-                </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
-                  CV Analysis
-                </h3>
-                <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                  Advanced AI analysis with industry-specific recommendations
-                  and ATS optimization.
-                </p>
-                <Badge
-                  variant={"outline"}
-                  className="bg-green-600/20 text-green-300 text-xs sm:text-sm"
-                >
-                  Expert Level
-                </Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-premium-card border border-white/10 hover:border-orange-500/50 transition-all duration-300">
-              <CardContent className="p-6 sm:p-8">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-4 sm:mb-6">
-                  <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-                </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
-                  AI Chat Assistant
-                </h3>
-                <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                  24/7 intelligent support for interview questions and career
-                  guidance.
-                </p>
-                <Badge
-                  variant={"outline"}
-                  className="bg-orange-600/20 text-orange-300 text-xs sm:text-sm"
-                >
-                  Always Available
-                </Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-premium-card border border-white/10 hover:border-indigo-500/50 transition-all duration-300">
-              <CardContent className="p-6 sm:p-8">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-4 sm:mb-6">
-                  <Brain className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-                </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
-                  Question Bank
-                </h3>
-                <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                  Access 10,000+ curated interview questions across all
-                  industries and roles.
-                </p>
-                <Badge
-                  variant={"outline"}
-                  className="bg-indigo-600/20 text-indigo-300 text-xs sm:text-sm"
-                >
-                  Comprehensive
-                </Badge>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-premium-card border border-white/10 hover:border-pink-500/50 transition-all duration-300">
-              <CardContent className="p-6 sm:p-8">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mb-4 sm:mb-6">
-                  <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-                </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
-                  Performance Analytics
-                </h3>
-                <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                  Detailed insights and progress tracking with personalized
-                  improvement plans.
-                </p>
-                <Badge
-                  variant={"outline"}
-                  className="bg-pink-600/20 text-pink-300 text-xs sm:text-sm"
-                >
-                  Data Driven
-                </Badge>
-              </CardContent>
-            </Card>
+              )
+            )}
           </div>
         </div>
       </section>

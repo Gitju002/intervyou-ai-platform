@@ -28,14 +28,11 @@ import {
 import Link from "next/link";
 import { getCurrentUser, signOut } from "@/lib/actions/auth.action";
 import { redirect } from "next/navigation";
+import Image from "next/image";
+import NavBar from "@/components/nav-bar";
 
 export default async function DashboardPage() {
-  // const [credits, setCredits] = useState(25);
   const user = await getCurrentUser();
-
-  // const handleSignOut = () => {
-  //   signOut();
-  // };
 
   const credits = 25;
   const getCreditStatus = () => {
@@ -59,55 +56,20 @@ export default async function DashboardPage() {
       };
     return { color: "text-red-400", bg: "bg-red-500/20", status: "Critical" };
   };
-
   const creditStatus = getCreditStatus();
 
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden pattern">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
       </div>
 
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
-
       {/* Navigation */}
-      <nav className="relative z-50 flex items-center justify-between p-6 lg:px-8 glass">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center neon-purple">
-            <Mic className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <span className="text-2xl font-bold text-white">IntervYou</span>
-            <div className="text-xs text-purple-400 font-medium">Dashboard</div>
-          </div>
-        </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <Zap className={`w-4 h-4 ${creditStatus.color}`} />
-            <span className="text-white font-medium">{credits} Credits</span>
-            <Badge
-              variant={"outline"}
-              className={`${creditStatus.bg} ${creditStatus.color} border-0`}
-            >
-              {creditStatus.status}
-            </Badge>
-          </div>
-          <span className="text-gray-300">Welcome, {user.name}</span>
-          <Button
-            variant="ghost"
-            // onClick={handleSignOut}
-            className="text-gray-300 hover:text-white hover:bg-white/10"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            Logout
-          </Button>
-        </div>
-      </nav>
+      <NavBar userName={user.name} />
 
       <div className="relative z-10 p-6 lg:px-8">
         {/* Credits Warning */}
@@ -150,7 +112,7 @@ export default async function DashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-premium-card border border-white/10 hover:border-purple-500/50 transition-all duration-300">
+          <Card className="glass border border-white/10 hover:border-purple-500/50 transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -171,7 +133,7 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-premium-card border border-white/10 hover:border-green-500/50 transition-all duration-300">
+          <Card className="glass border border-white/10 hover:border-green-500/50 transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -188,7 +150,7 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-premium-card border border-white/10 hover:border-blue-500/50 transition-all duration-300">
+          <Card className="glass border border-white/10 hover:border-blue-500/50 transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -205,7 +167,7 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-premium-card border border-white/10 hover:border-orange-500/50 transition-all duration-300">
+          <Card className="glass border border-white/10 hover:border-orange-500/50 transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -226,7 +188,7 @@ export default async function DashboardPage() {
         {/* Main Features Grid */}
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           {/* Quick Actions */}
-          <Card className="bg-premium-card border border-white/10">
+          <Card className="glass border border-white/10">
             <CardHeader>
               <CardTitle className="text-white text-2xl">
                 Quick Actions
@@ -307,7 +269,7 @@ export default async function DashboardPage() {
           </Card>
 
           {/* Credit Management */}
-          <Card className="bg-premium-card border border-white/10">
+          <Card className="glass border border-white/10">
             <CardHeader>
               <CardTitle className="text-white text-2xl flex items-center">
                 <CreditCard className="w-6 h-6 mr-3" />
@@ -361,7 +323,7 @@ export default async function DashboardPage() {
                 <Link href="/pricing">
                   <Button
                     variant="outline"
-                    className="w-full border-white/20 text-white hover:bg-white/10 py-4 glass"
+                    className="w-full  text-white hover:bg-white/10 py-4"
                   >
                     <Crown className="w-5 h-5 mr-2" />
                     Upgrade to Premium
@@ -375,7 +337,7 @@ export default async function DashboardPage() {
         {/* Recent Activities & Performance */}
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Recent Activities */}
-          <Card className="bg-premium-card border border-white/10">
+          <Card className="glass border border-white/10">
             <CardHeader>
               <CardTitle className="text-white text-2xl">
                 Recent Activities
@@ -443,7 +405,7 @@ export default async function DashboardPage() {
           </Card>
 
           {/* Performance Metrics */}
-          <Card className="bg-premium-card border border-white/10">
+          <Card className="glass border border-white/10">
             <CardHeader>
               <CardTitle className="text-white text-2xl">
                 Performance Metrics

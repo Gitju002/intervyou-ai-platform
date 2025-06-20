@@ -28,18 +28,18 @@ const InterviewCard = async ({
 
   const badgeColor =
     {
-      Behavioral: "bg-light-400",
-      Mixed: "bg-light-600",
-      Technical: "bg-light-800",
-    }[normalizedType] || "bg-light-600";
+      Behavioral: "bg-slate-400/30",
+      Mixed: "bg-slate-600/30",
+      Technical: "bg-slate-800/30",
+    }[normalizedType] || "bg-slate-600/30";
 
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()
   ).format("MMM D, YYYY");
 
   return (
-    <div className="p-0.5 rounded-2xl bg-slate-700 w-[360px] max-sm:w-full min-h-96">
-      <div className="bg-slate-900 rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between">
+    <div className="w-[360px] max-sm:w-full min-h-96 [background:linear-gradient(45deg,#172033,theme(colors.slate.800)_50%,#172033)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] rounded-2xl border border-transparent animate-border">
+      <div className=" bg-premium-dark  card-interview">
         <div>
           {/* Type Badge */}
           <div
@@ -48,7 +48,9 @@ const InterviewCard = async ({
               badgeColor
             )}
           >
-            <p className="badge-text ">{normalizedType}</p>
+            <p className="text-sm font-semibold capitalize ">
+              {normalizedType}
+            </p>
           </div>
 
           {/* Cover Image */}

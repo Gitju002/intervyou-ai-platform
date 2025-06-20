@@ -24,6 +24,14 @@ import {
   Briefcase,
 } from "lucide-react";
 import Link from "next/link";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationPrevious,
+  PaginationNext,
+} from "@/components/ui/pagination";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Question {
   id: string;
@@ -49,6 +57,9 @@ export default function QuestionsPage() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const questionsPerPage = 5; // Or 10, adjust per your UI
 
   const fetchQuestions = async () => {
     setLoading(true);
@@ -251,6 +262,24 @@ export default function QuestionsPage() {
     );
   });
 
+  const paginatedQuestions = filteredQuestions.slice(
+    (currentPage - 1) * questionsPerPage,
+    currentPage * questionsPerPage
+  );
+
+  const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    searchTerm,
+    selectedTopic,
+    selectedDifficulty,
+    selectedType,
+    selectedRole,
+    selectedCompany,
+  ]);
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Easy":
@@ -277,12 +306,35 @@ export default function QuestionsPage() {
     }
   };
 
+  const renderSkeletons = () => {
+    return Array.from({ length: questionsPerPage }).map((_, index) => (
+      <Card
+        key={index}
+        className="bg-white/5 border-white/10 backdrop-blur-sm p-6"
+      >
+        <div className="space-y-4">
+          <Skeleton className="h-6 w-3/4 bg-white/10" />
+          <div className="flex gap-2">
+            <Skeleton className="h-5 w-20 bg-white/10" />
+            <Skeleton className="h-5 w-20 bg-white/10" />
+            <Skeleton className="h-5 w-16 bg-white/10" />
+          </div>
+          <Skeleton className="h-4 w-full bg-white/10" />
+          <Skeleton className="h-4 w-5/6 bg-white/10" />
+        </div>
+      </Card>
+    ));
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
+    <div className="min-h-screen relative overflow-hidden antialiased pattern">
+      <div className="absolute inset-0 ">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-800/20 via-black to-blue-800/30"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
+      </div>
 
       {/* Navigation */}
-      <nav className="relative z-10 flex items-center justify-between p-6 lg:px-8 border-b border-white/10">
+      <nav className="relative z-50 flex items-center justify-between p-4 sm:p-6 lg:px-8 border-b border-white/10 glass">
         <div className="flex items-center space-x-4">
           <Link href="/dashboard">
             <Button variant="ghost" className="text-white hover:bg-white/10">
@@ -391,9 +443,7 @@ export default function QuestionsPage() {
           </Card>
 
           {loading ? (
-            <div className="text-center text-white py-10">
-              Loading questions...
-            </div>
+            <div className="grid gap-6">{renderSkeletons()}</div>
           ) : error ? (
             <div className="text-center text-red-400 py-10">{error}</div>
           ) : filteredQuestions.length === 0 ? (
@@ -407,93 +457,137 @@ export default function QuestionsPage() {
               </p>
             </div>
           ) : (
-            <div className="grid gap-6">
-              {filteredQuestions.map((question) => (
-                <Card
-                  key={question.id}
-                  className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
-                >
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-white text-lg mb-2">
-                          {question.question}
-                        </CardTitle>
-                        <div className="flex flex-wrap gap-2 mb-2">
-                          <Badge
-                            variant={"outline"}
-                            className={getDifficultyColor(question.difficulty)}
-                          >
-                            {question.difficulty}
-                          </Badge>
-                          <Badge
-                            variant={"outline"}
-                            className="bg-blue-500/20 text-blue-300 flex items-center"
-                          >
-                            {getTypeIcon(question.type)}
-                            <span className="ml-1">{question.type}</span>
-                          </Badge>
-                          <Badge
-                            variant={"outline"}
-                            className="bg-purple-500/20 text-purple-300"
-                          >
-                            {question.topic}
-                          </Badge>
-                          {question.role && (
+            <>
+              <div className="grid gap-6">
+                {paginatedQuestions.map((question) => (
+                  <Card
+                    key={question.id}
+                    className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+                  >
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <CardTitle className="text-white text-lg mb-2">
+                            {question.question}
+                          </CardTitle>
+                          <div className="flex flex-wrap gap-2 mb-2">
                             <Badge
                               variant={"outline"}
-                              className="bg-pink-500/20 text-pink-300"
+                              className={getDifficultyColor(
+                                question.difficulty
+                              )}
                             >
-                              {question.role}
+                              {question.difficulty}
                             </Badge>
-                          )}
-                          {question.companyTags?.map((c) => (
                             <Badge
                               variant={"outline"}
-                              key={c}
-                              className="bg-orange-500/20 text-orange-300"
+                              className="bg-blue-500/20 text-blue-300 flex items-center"
                             >
-                              {c}
+                              {getTypeIcon(question.type)}
+                              <span className="ml-1">{question.type}</span>
                             </Badge>
-                          ))}
-                        </div>
-                        <div className="flex flex-wrap gap-1">
-                          {question.tags.map((tag, index) => (
                             <Badge
-                              key={index}
-                              variant="outline"
-                              className="border-white/20 text-gray-300 text-xs"
+                              variant={"outline"}
+                              className="bg-purple-500/20 text-purple-300"
                             >
-                              {tag}
+                              {question.topic}
                             </Badge>
-                          ))}
+                            {question.role && (
+                              <Badge
+                                variant={"outline"}
+                                className="bg-pink-500/20 text-pink-300"
+                              >
+                                {question.role}
+                              </Badge>
+                            )}
+                            {question.companyTags?.map((c) => (
+                              <Badge
+                                variant={"outline"}
+                                key={c}
+                                className="bg-orange-500/20 text-orange-300"
+                              >
+                                {c}
+                              </Badge>
+                            ))}
+                          </div>
+                          <div className="flex flex-wrap gap-1">
+                            {question.tags.map((tag, index) => (
+                              <Badge
+                                key={index}
+                                variant="outline"
+                                className="border-white/20 text-gray-300 text-xs"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
                         </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-400/10"
+                        >
+                          <Star className="w-4 h-4" />
+                        </Button>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-400/10"
-                      >
-                        <Star className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  {question.sampleAnswer && (
-                    <CardContent>
-                      <div className="bg-white/5 rounded-lg p-4">
-                        <h4 className="text-white font-medium mb-2 flex items-center">
-                          <Briefcase className="w-4 h-4 mr-2" />
-                          Sample Approach:
-                        </h4>
-                        <p className="text-gray-300 text-sm">
-                          {question.sampleAnswer}
-                        </p>
-                      </div>
-                    </CardContent>
-                  )}
-                </Card>
-              ))}
-            </div>
+                    </CardHeader>
+                    {question.sampleAnswer && (
+                      <CardContent>
+                        <div className="bg-white/5 rounded-lg p-4">
+                          <h4 className="text-white font-medium mb-2 flex items-center">
+                            <Briefcase className="w-4 h-4 mr-2" />
+                            Sample Approach:
+                          </h4>
+                          <p className="text-gray-300 text-sm">
+                            {question.sampleAnswer}
+                          </p>
+                        </div>
+                      </CardContent>
+                    )}
+                  </Card>
+                ))}
+              </div>
+
+              {totalPages > 1 && (
+                <div className="mt-6 flex justify-center">
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious
+                          onClick={() =>
+                            setCurrentPage((prev) => Math.max(prev - 1, 1))
+                          }
+                          className={
+                            currentPage === 1
+                              ? " pointer-events-none opacity-50"
+                              : "cursor-pointer"
+                          }
+                        />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <span className="text-white px-3">
+                          Page {currentPage} of {totalPages}
+                        </span>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationNext
+                          onClick={() =>
+                            setCurrentPage((prev) =>
+                              Math.min(prev + 1, totalPages)
+                            )
+                          }
+                          className={
+                            currentPage === totalPages
+                              ? "pointer-events-none opacity-50"
+                              : "cursor-pointer"
+                          }
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

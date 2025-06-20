@@ -51,6 +51,7 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --bg-pattern: url("/pattern.png");
   }
 }
 
@@ -149,4 +150,124 @@ body {
 
 .neon-green {
   box-shadow: 0 0 20px rgba(34, 197, 94, 0.3), 0 0 40px rgba(34, 197, 94, 0.1);
+}
+
+.neon-orange {
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1);
+}
+
+.neon-indigo {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), 0 0 40px rgba(99, 102, 241, 0.1);
+}
+
+.neon-pink {
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.3), 0 0 40px rgba(236, 72, 153, 0.1);
+}
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+h2 {
+  @apply text-3xl font-semibold;
+}
+h3 {
+  @apply text-2xl font-semibold;
+}
+ul {
+  @apply list-disc list-inside;
+}
+li {
+  @apply text-slate-100;
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.dark-gradient {
+  @apply bg-gradient-to-b from-[#22153202] to-[#190126da];
+}
+
+.blue-gradient-dark {
+  @apply bg-gradient-to-b from-[#17153222] to-[#010b3222];
+}
+
+.border-gradient {
+  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
+}
+
+.pattern {
+  @apply bg-[url('/pattern.png')] bg-top bg-no-repeat mix-blend-screen;
+}
+
+.border-gradient {
+  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
+}
+
+.container {
+  @apply px-4 sm:px-8 md:px-16 w-full mx-auto;
+  container-type: inline-size;
+}
+
+.card-border {
+  @apply p-0.5 rounded-2xl;
+}
+
+.card-interview {
+  @apply rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
+}
+
+.card-interviewer {
+  @apply flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-lg border-2 flex-1 sm:basis-1/2 w-full;
+}
+
+.avatar {
+  @apply z-10 flex items-center justify-center bg-slate-900 rounded-full size-[120px] relative;
+
+  .animate-speak {
+    @apply absolute inline-flex size-5/6 animate-ping rounded-full opacity-75;
+  }
+}
+
+.tech-tooltip {
+  @apply absolute bottom-full mb-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-gray-700 rounded-md shadow-md;
+}
+
+.call-view {
+  @apply flex sm:flex-row flex-col gap-10 items-center justify-between w-full;
+}
+
+.animate-speak {
+  @apply absolute inline-flex size-5/6 animate-ping rounded-full opacity-75;
+}
+
+.card-content {
+  @apply flex flex-col gap-2 justify-center items-center p-7 dark-gradient border-2 rounded-2xl min-h-full;
+}
+
+.transcript-border {
+  @apply border-2  p-0.5 rounded-2xl w-full;
+
+  .transcript {
+    @apply dark-gradient rounded-2xl  min-h-12 px-5 py-3 flex items-center justify-center;
+
+    p {
+      @apply text-lg text-center text-white;
+    }
+  }
+}
+
+.btn-call {
+  @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white transition-colors duration-150 bg-gradient-to-r from-green-500 to-emerald-500 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-green-400 hover:bg-green-600 min-w-28 cursor-pointer items-center justify-center overflow-visible;
+
+  .span {
+    @apply bg-green-200 h-[85%] w-[65%];
+  }
+}
+
+.btn-disconnect {
+  @apply inline-block px-7 py-3 text-sm font-bold leading-5 text-white transition-colors duration-150 bg-gradient-to-r from-red-500 to-rose-500 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-red-400 hover:bg-red-400 min-w-28;
 }
